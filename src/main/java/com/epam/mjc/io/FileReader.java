@@ -1,13 +1,17 @@
 package com.epam.mjc.io;
 import java.io.BufferedReader;
 import java.io.File;
-//import java.io.FileReader;
 import java.io.IOException;
+
+
 
 public class FileReader {
     public Profile getDataFromFile(File file) {
+    	  
         Profile profile = new Profile();
         StringBuilder contentBuilder = new StringBuilder();
+        
+       
 
         try (BufferedReader br = new BufferedReader(new java.io.FileReader(file))) {
             String line;
@@ -39,8 +43,10 @@ public class FileReader {
                         break;
                     case "Phone":
                     	 profile.setPhone(Long.parseLong(value));  // Convertir a long
-                       // profile.setPhone(value);
                         break;
+                    default :
+                    	System.out.println("There is no information");
+                    	break;
 					
                 }
             }
@@ -49,11 +55,14 @@ public class FileReader {
         return profile;
     }
 
-    public static void main(String[] args) {
+
+
+	public static void main(String[] args) {
         FileReader fileReader = new FileReader();
         File file = new File("src/main/resources/Profile.txt");
         Profile profile = fileReader.getDataFromFile(file);
         System.out.println(profile);
+        
     }
 }
 
