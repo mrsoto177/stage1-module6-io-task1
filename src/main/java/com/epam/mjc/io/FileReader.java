@@ -2,12 +2,12 @@ package com.epam.mjc.io;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-
+import java.util.logging.Logger;
 
 
 public class FileReader {
     public Profile getDataFromFile(File file) {
-    	  
+    	 Logger logger = Logger.getLogger("MyLog");
         Profile profile = new Profile();
         StringBuilder contentBuilder = new StringBuilder();
         
@@ -44,8 +44,8 @@ public class FileReader {
                     case "Phone":
                     	 profile.setPhone(Long.parseLong(value));  // Convertir a long
                         break;
-                    default :
-                    	System.out.println("There is no information");
+                    default :                   	
+                    	logger.info("There is no information");
                     	break;
 					
                 }
@@ -58,10 +58,11 @@ public class FileReader {
 
 
 	public static void main(String[] args) {
+		Logger logger = Logger.getLogger("MyLog");
         FileReader fileReader = new FileReader();
         File file = new File("src/main/resources/Profile.txt");
         Profile profile = fileReader.getDataFromFile(file);
-        System.out.println(profile);
+        logger.info( ""+profile);
         
     }
 }
